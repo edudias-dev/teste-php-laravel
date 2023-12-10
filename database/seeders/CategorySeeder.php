@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -13,10 +14,14 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         DB::table('categories')->insert([
-            'name' => 'Remessa Parcial'
-        ]);
-        DB::table('categories')->insert([
-            'name' => 'Remessa'
+            [
+                'name' => 'Remessa Parcial',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ],
+            [
+                'name' => 'Remessa',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ]
         ]);
     }
 }

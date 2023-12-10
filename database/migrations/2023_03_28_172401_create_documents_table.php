@@ -13,10 +13,18 @@ return new class extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->bigInteger('category_id');
-            $table->string('title', 60);
+            $table->uuid();
+            $table->string('title', 60)->index('doc_title_index');
             $table->text('contents');
+            $table->enum('status', [
+                'processed',
+                'pending',
+                'canceled'
+                ]
+            )->index('doc_status_index')->default('pending');
+
+            $table->timestamps();
 
             $table->foreign('category_id')
                 ->references('id')

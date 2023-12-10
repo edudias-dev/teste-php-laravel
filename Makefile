@@ -5,8 +5,8 @@ setup:
 	@docker-compose up -d --build
 	@make install-dependencies
 	
-	# @make db-migrate
-	# @make db-seed
+	@make db-migrate
+	@make db-seed
 	@docker-compose exec app php artisan key:generate && php artisan config:cache && php artisan cache:clear
 
 install-dependencies:
