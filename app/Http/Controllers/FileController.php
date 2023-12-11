@@ -8,11 +8,10 @@ use Illuminate\View\View;
 
 class FileController extends Controller
 {
-    public FileProcessorService $service;
-
+    public FileProcessorService $fileService;
     public function __construct(FileProcessorService $service)
     {
-        $this->service = $service;
+        $this->fileService = $service;
     }
 
     public function index(): View
@@ -22,6 +21,6 @@ class FileController extends Controller
 
     public function uploadFile(UploadFileRequest $request): void
     {
-        $this->service->processFile($request->file('file'));
+        $this->fileService->process($request->file('file'));
     }
 }

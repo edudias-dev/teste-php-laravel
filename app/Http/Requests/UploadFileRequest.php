@@ -15,7 +15,11 @@ class UploadFileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'file' => ['required', 'mimes:json', new ValidateJsonFormatRule()]
+            'file' => [
+                'required',
+                'mimes:json',
+                new ValidateJsonFormatRule()
+            ]
         ];
     }
 }
