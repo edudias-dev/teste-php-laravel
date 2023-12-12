@@ -19,7 +19,7 @@ class FileProcessorServiceTest extends TestCase
      * @throws Exception
      * @throws InvalidDocumentTitle
      */
-    public function testValidRemessaTitle(): void
+    public function testTituloValidoRemessa(): void
     {
         $document = Document::factory()->make([
             'title' => 'title semestre',
@@ -38,7 +38,7 @@ class FileProcessorServiceTest extends TestCase
     /**
      * @throws Exception
      */
-    public function testInvalidRemessaTitleException(): void
+    public function testTituloInvalidRemessaException(): void
     {
         $document = Document::factory()->make([
             'title' => 'title',
@@ -58,7 +58,7 @@ class FileProcessorServiceTest extends TestCase
      * @throws Exception
      * @throws InvalidDocumentTitle
      */
-    public function testValidRemessaParcialTitle(): void
+    public function testTituloValidoRemessaParcial(): void
     {
         $document = Document::factory()->make([
             'title' => 'title Janeiro',
@@ -80,7 +80,7 @@ class FileProcessorServiceTest extends TestCase
         $fileProcessorService->validateFileTitle($document);
     }
 
-    public function testInvalidRemessaParcialTitle(): void
+    public function testTituloInvalidoNaRemessaParcialException(): void
     {
         $document = Document::factory()->make([
             'title' => 'some title without month name',

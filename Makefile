@@ -1,10 +1,13 @@
 #!/usr/bin/make
+start:
+	@make setup
+	@make queue-work
 
 setup:
 	@cp ./.env.example .env
 	@docker-compose up -d --build
 	@make install-dependencies
-	
+
 	@make db-migrate
 	@make db-seed
 	@docker-compose exec app php artisan key:generate && php artisan config:cache && php artisan cache:clear
@@ -23,3 +26,9 @@ db-migrate:
 
 db-seed:
 	@docker-compose run app php artisan db:seed
+
+unit-tests:
+	@docker-compose run app php ./vendor/bin/phpunit --no-coverage --testdox
+
+queue-work:
+	@docker-compose run app php artisan queue:work --queue=post-processor-file
