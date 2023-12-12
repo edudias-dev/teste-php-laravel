@@ -23,11 +23,9 @@ class FileController extends Controller
     {
         $this->fileService->addToProcess($request->file('file'));
 
-        $message = 'Arquivo carregado com sucesso! \n Acesse %s para iniciar o processamento.';
-
         return back()->with(
             'success',
-            sprintf($message, route('file-post-processor-view'))
+            'Arquivo carregado com sucesso! \n Aguarde, em breve faremos o processamento.'
         );
     }
 }
