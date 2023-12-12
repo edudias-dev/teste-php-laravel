@@ -9,7 +9,6 @@ use Illuminate\View\View;
 class FileController extends Controller
 {
     public FileProcessorService $fileService;
-
     public function __construct(FileProcessorService $service)
     {
         $this->fileService = $service;
