@@ -61,7 +61,7 @@ class FileProcessorService {
      * @throws InvalidDocumentTitle
      * @expectedException InvalidDocumentTitle
      */
-    private function validateFileTitle($document): void
+    public function validateFileTitle($document): void
     {
         if (
             $document->category->name == CategoriesEnum::REMESSA &&
