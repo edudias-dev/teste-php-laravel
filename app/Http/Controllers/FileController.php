@@ -9,6 +9,7 @@ use Illuminate\View\View;
 class FileController extends Controller
 {
     public FileProcessorService $fileService;
+
     public function __construct(FileProcessorService $service)
     {
         $this->fileService = $service;
@@ -21,11 +22,13 @@ class FileController extends Controller
 
     public function uploadFile(UploadFileRequest $request): \Illuminate\Http\RedirectResponse
     {
-        $this->fileService->process($request->file('file'));
+        $this->fileService->addToProcess($request->file('file'));
+
+        $message = 'Arquivo carregado com sucesso! \n Acesse %s para iniciar o processamento.';
 
         return back()->with(
             'success',
-            'Arquivo carregado com sucesso! Acesse /post-upload para iniciar o processamento.'
+            sprintf($message, route('file-post-processor-view'))
         );
     }
 }

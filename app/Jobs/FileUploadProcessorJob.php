@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\DTOs\DocumentDTO;
 use App\Interfaces\DocumentRepositoryInterface;
+use App\Services\FileProcessorService;
 use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -14,6 +15,8 @@ use Illuminate\Support\Facades\Log;
 
 class FileUploadProcessorJob implements ShouldQueue
 {
+    protected int $tries = 1;
+
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     private string $documentUuid;
@@ -28,16 +31,21 @@ class FileUploadProcessorJob implements ShouldQueue
     /**
      * @throws Exception
      */
-    public function handle(DocumentRepositoryInterface $repository): void
+    public function handle(FileProcessorService $service): void
     {
-        $document = $repository->getByUuid($this->documentUuid);
+        try {
+            $service->processFile($this->documentUuid);
 
-        if (! $document) {
-            $message = self::FILE_NOT_FOUND_ERROR_MESSAGE;
-            Log::error($message);
-            throw new Exception($message);
+            Log::info(sprintf("file processor job: %s", $this->documentUuid), [
+                'status' => 'processed',
+                'message' => 'file processed successfully'
+            ]);
+        } catch (Exception $exception) {
+            Log::error(
+                sprintf("error to process file job: %s", $this->documentUuid), [
+                    'status' => 'processed',
+                    'message' => $exception->getMessage()
+                ]);
         }
-
-        $document->update(['status' => 'processed']);
     }
 }

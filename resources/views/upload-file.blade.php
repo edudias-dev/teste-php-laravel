@@ -25,7 +25,9 @@
     @endif
 
     @if(session('success'))
-       <h1>{{session('success')}}</h1>
+        <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+            <span class="font-medium">{{session('success')}}</span>
+        </div>
     @endif
     <div class="flex justify-center mt-8">
     <div class="max-w-2xl rounded-lg shadow-xl bg-gray-50">

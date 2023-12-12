@@ -16,17 +16,19 @@ class DocumentRepository implements DocumentRepositoryInterface
     {
         $this->model = Document::query();
     }
+
     public function add(DocumentDTO $document): Model
     {
         return $this->model->create($document->toArray());
     }
 
-    /**
-     * @param string $uuid
-     * @return Model|null
-     */
-    public function getByUuid(string $uuid): null|Model
+    public function getByUuid(string $uuid)
     {
         return $this->model->where('uuid', $uuid)->first();
+    }
+
+    public function update(int $documentId, array $data): bool
+    {
+        return $this->model->find($documentId)->update($data);
     }
 }
