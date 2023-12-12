@@ -19,8 +19,15 @@ class FileController extends Controller
         return view('upload-file');
     }
 
-    public function uploadFile(UploadFileRequest $request): void
+    public function uploadFile(UploadFileRequest $request): \Illuminate\Http\RedirectResponse
     {
-        $this->fileService->process($request->file('file'));
+        $this->fileService->addToProcess($request->file('file'));
+
+        $message = 'Arquivo carregado com sucesso! \n Acesse %s para iniciar o processamento.';
+
+        return back()->with(
+            'success',
+            sprintf($message, route('file-post-processor-view'))
+        );
     }
 }

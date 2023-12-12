@@ -23,6 +23,12 @@
     @if ($errors->any())
         {{ implode('', $errors->all('<div>:message</div>')) }}
     @endif
+
+    @if(session('success'))
+        <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+            <span class="font-medium">{{session('success')}}</span>
+        </div>
+    @endif
     <div class="flex justify-center mt-8">
     <div class="max-w-2xl rounded-lg shadow-xl bg-gray-50">
         <div class="m-4">
@@ -47,6 +53,6 @@
             <button class="w-full px-4 py-2 text-white bg-blue-500 rounded shadow-xl">Create</button>
         </div>
     </div>
-</div>         
+</div>
     </body>
 </html>

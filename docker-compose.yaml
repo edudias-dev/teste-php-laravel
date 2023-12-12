@@ -16,6 +16,7 @@ services:
       - DB_DATABASE=laravel
       - DB_USERNAME=laravel_user
       - DB_PASSWORD=secret
+      - DB_CONNECTION=pgsql
     depends_on:
       - postgres
     volumes:

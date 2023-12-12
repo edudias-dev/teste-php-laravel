@@ -22,8 +22,13 @@ class DocumentRepository implements DocumentRepositoryInterface
         return $this->model->create($document->toArray());
     }
 
-    public function getByUuid(string $uuid): Model
+    public function getByUuid(string $uuid)
     {
         return $this->model->where('uuid', $uuid)->first();
+    }
+
+    public function update(int $documentId, array $data): bool
+    {
+        return $this->model->find($documentId)->update($data);
     }
 }
