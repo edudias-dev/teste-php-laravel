@@ -21,7 +21,6 @@ class FileUploadProcessorJob implements ShouldQueue
 
     private string $documentUuid;
     private DocumentRepositoryInterface $documentRepository;
-    private const FILE_NOT_FOUND_ERROR_MESSAGE = 'Documento não encontrado!';
 
     public function __construct(string $documentUuid)
     {
@@ -43,7 +42,7 @@ class FileUploadProcessorJob implements ShouldQueue
         } catch (Exception $exception) {
             Log::error(
                 sprintf("error to process file job: %s", $this->documentUuid), [
-                    'status' => 'processed',
+                    'status' => 'pending',
                     'message' => $exception->getMessage()
                 ]);
         }

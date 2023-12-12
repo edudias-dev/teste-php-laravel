@@ -44,7 +44,7 @@ make unit-tests
 ### Realizar build da imagem docker
 ```make build``` 
 ### Atualizar os pacotes do composer
-`make update`:
+`make update`
 
 ### Executa as migrations
 `make db-migrate`
@@ -52,7 +52,7 @@ make unit-tests
 ### Rodar as Seeds
 `make db-seed`
 
-
 ## Melhorias Migrations
 - Inclusão de indices nas principais colunas, otimizando a pesquisa em ambas tabelas
-- Adição do campo de `status` na coluna `documents`, facilitando a visualização dos arquivos já processados dos pendentes.
+- Adição do campo de `status` na tabela `documents`, facilitando a visualização dos arquivos já processados e dos pendentes de processamento.
+- Utilização de UUID para recuperação dos registros 
