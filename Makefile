@@ -1,7 +1,6 @@
 #!/usr/bin/make
 start:
 	@make setup
-	@make queue-work
 
 setup:
 	@cp ./.env.example .env
@@ -10,7 +9,9 @@ setup:
 
 	@make db-migrate
 	@make db-seed
-	@docker-compose exec app php artisan key:generate && php artisan config:cache && php artisan cache:clear
+	@docker-compose run app php artisan key:generate
+	@docker-compose run app php artisan config:cache
+	@docker-compose run app php artisan cache:clear
 
 install-dependencies:
 	@docker-compose exec app composer install

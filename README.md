@@ -17,6 +17,20 @@ Para iniciar o projeto, execute o seguinte comando:
 make start
 ```
 
+## URL do projeto
+
+O projeto estará sendo executado no endereço http://localhost:6539/upload
+
+## Processamento da fila
+
+Para iniciar o processamento dos arquivos submetidos, basta executar o seguinte comando:
+
+```
+make queue-work 
+```
+Caso existam arquivos pendentes de processamento, o resultado será semalhante a este:
+![img_1.png](img_1.png)
+
 ## Testes unitários
 
 Para validar os testes unitários, execute
